@@ -1,5 +1,8 @@
 <template>
     <div class="cardBaseFormat" :class="{'weatherCardDayDiv':dayTime, 'weatherCardNightDiv':!dayTime}">
+        <div class="mainViewDiv">
+            <MainView :temp=temperature :location="location" :weather-type="weatherObj?.weatherType"/>
+        </div>
         <h1>{{ `${temperature}°C` }}</h1>
         <h1>{{ location }}</h1>
         <h1>{{weekday}}</h1>
@@ -10,6 +13,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import WeatherController, { WeatherSnapshot } from "../assets/libs/weatherController";
+import MainView from "./MainView.vue";
 
     let testText = ref("Hello!");
     let location = ref("Stadtlohn");
@@ -41,7 +45,7 @@ import WeatherController, { WeatherSnapshot } from "../assets/libs/weatherContro
         
         if(weatherObj.value !== undefined)
         {
-            temperature.value = weatherObj.value.temp;
+            temperature.value = Math.round(weatherObj.value.temp);
             console.log(temperature.value);
 
             if(weatherObj.value.isDay){
@@ -59,7 +63,7 @@ import WeatherController, { WeatherSnapshot } from "../assets/libs/weatherContro
 
 </script>
 
-<style>
+<style scoped>
     .weatherCardDayDiv
     {
         position:absolute;
@@ -83,5 +87,12 @@ import WeatherController, { WeatherSnapshot } from "../assets/libs/weatherContro
         position:absolute;
         width:100%;
         height:100%;
+    }
+
+    .mainViewDiv
+    {
+        position:relative;
+        left:5px;
+        top:20px;
     }
 </style>

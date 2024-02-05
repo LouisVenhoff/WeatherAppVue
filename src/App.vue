@@ -3,7 +3,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';import WeatherCard from './components/WeatherCard.vue';
+import { defineComponent } from 'vue';
+import WeatherCard from './components/WeatherCard.vue';
 
 export default defineComponent({
   name: 'App',
